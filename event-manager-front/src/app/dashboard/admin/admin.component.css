@@ -1,0 +1,176 @@
+/* 🌈 Fond animé admin */
+.animated-bg-admin {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #e0f7fa, #fce4ec, #e3f2fd, #f0f4c3);
+  background-size: 400% 400%;
+  animation: moveBackground 15s ease infinite;
+  z-index: -1;
+}
+
+@keyframes moveBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🌙 Mode sombre */
+.admin-dashboard.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+.admin-dashboard.dark-mode .stat-card {
+  background: #1e1e1e;
+  color: #f0f0f0;
+}
+.admin-dashboard.dark-mode .action-card {
+  background: #333;
+}
+.admin-dashboard.dark-mode .toggle-dark-mode {
+  background: #1e1e1e;
+  color: #f0f0f0;
+}
+
+/* 💫 Contenu */
+.dashboard-content {
+  max-width: 1100px;
+  margin: auto;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+  padding-top: 2rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #1d3557;
+}
+.admin-dashboard.dark-mode h2 {
+  color: #80d0ff;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+/* 📊 Stats */
+.stats-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  border-radius: 16px;
+  padding: 1.5rem;
+  flex: 1 1 280px;
+  max-width: 300px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  color: white;
+}
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+/* 🎨 Couleurs stat */
+.bg-blue { background: #3498db; }
+.bg-green { background: #27ae60; }
+.bg-purple { background: #9b59b6; }
+
+.stat-card .icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card .info strong {
+  font-size: 1.8rem;
+  display: block;
+}
+.stat-card .info span {
+  font-size: 1rem;
+}
+
+/* 🚀 Actions */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.action-card {
+  background: linear-gradient(to right, #00b4db, #0083b0);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  font-weight: bold;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.action-card:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+}
+
+/* 🌙 Bouton toggle sombre repositionné en bas à gauche */
+.toggle-dark-mode {
+  position: fixed;
+  bottom: 80px; /* ⬆ au-dessus du bouton accueil */
+  left: 20px;
+  background-color: #ffffffcc;
+  color: #1d3557;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.toggle-dark-mode:hover {
+  background-color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Adaptation dark mode */
+.admin-dashboard.dark-mode .toggle-dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+
+/* 🏠 Accueil */
+.floating-home-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #1d3557;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+.floating-home-btn:hover {
+  transform: scale(1.1);
+  background-color: #457b9d;
+}
+
+/* Fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

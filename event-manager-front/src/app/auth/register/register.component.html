@@ -1,0 +1,43 @@
+<div class="register-container">
+  <h2>Inscription</h2>
+
+  <!-- Message d'erreur -->
+  <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+
+  <form (ngSubmit)="onRegister()">
+    <div class="form-group">
+      <label for="name">Nom complet</label>
+      <input type="text" id="name" name="name" [(ngModel)]="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Adresse email</label>
+      <input type="email" id="email" name="email" [(ngModel)]="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" required>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirmer le mot de passe</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required>
+    </div>
+
+    <div class="form-group">
+      <label for="role">Rôle</label>
+      <select id="role" name="role" [(ngModel)]="role">
+        <option value="utilisateur">Utilisateur</option>
+        <option value="admin">Administrateur</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn">S'inscrire</button>
+  </form>
+
+  <p class="login-link">
+    Vous avez déjà un compte ? <a routerLink="/login">Connectez-vous ici</a>
+  </p>
+</div>

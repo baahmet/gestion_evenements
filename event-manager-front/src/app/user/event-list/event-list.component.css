@@ -1,0 +1,225 @@
+/* 🌈 Arrière-plan animé doux */
+.animated-bg-admin {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 30%, #e0f2ff, #f9f9ff, #fff);
+  background-size: 400% 400%;
+  animation: waveBg 20s ease-in-out infinite alternate;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes waveBg {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* 📦 Conteneur de la grille */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  padding: 2rem 1rem;
+  z-index: 1;
+  position: relative;
+}
+
+/* ✨ Cartes d'événements stylisées */
+.event-card {
+  background: linear-gradient(135deg, #f0f4ff, #ffffff);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.event-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.event-content {
+  padding: 1rem 1.2rem;
+}
+
+.event-content h3 {
+  font-size: 1.3rem;
+  color: #1d3557;
+  margin-bottom: 0.3rem;
+}
+
+.description {
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.date-lieu {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* 🔘 Bouton voir plus */
+.btn-inscrire {
+  display: inline-block;
+  margin-top: 0.7rem;
+  background: #6366f1;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn-inscrire:hover {
+  background: #4338ca;
+}
+
+/* 🧪 Formulaire de filtrage stylisé */
+.filter-form {
+  background-color: #ffffffcc;
+  backdrop-filter: blur(6px);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  margin: 2rem auto;
+  max-width: 1000px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.filter-form input,
+.filter-form button {
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  min-width: 200px;
+}
+
+.filter-form button {
+  background-color: #1d3557;
+  color: white;
+  border: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.filter-form button:hover {
+  background-color: #457b9d;
+}
+
+/* 🌐 Pagination améliorée */
+.pagination-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.pagination-container button {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.pagination-container button.active {
+  background: #22d3ee;
+  color: #1e293b;
+}
+
+.pagination-container button:hover {
+  background: #3730a3;
+}
+
+/* 🏠 Bouton flottant animé */
+.floating-home-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: #0ea5e9;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  z-index: 1000;
+  transition: transform 0.3s, background 0.3s;
+  animation: popIn 0.6s ease-in-out;
+}
+
+.floating-home-btn:hover {
+  transform: scale(1.1);
+  background-color: #0284c7;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+/* ✅ Chargement */
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  color: #004080;
+  font-weight: bold;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-top: 5px solid #004080;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+

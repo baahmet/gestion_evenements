@@ -1,0 +1,29 @@
+<div class="mes-inscriptions">
+  <!-- 🏠 Bouton flottant vers la page d'accueil utilisateur -->
+  <a routerLink="/dashboard/user" class="floating-home-btn" title="Retour à l’accueil">
+    🏠
+  </a>
+  <div *ngIf="isLoading" class="spinner-container">
+    <div class="spinner"></div>
+    <p>Chargement de vos inscriptions...</p>
+  </div>
+  <h2>🎟️ Mes Inscriptions</h2>
+
+  <div class="inscriptions-grid" *ngIf="inscriptions.length > 0; else noInscriptions">
+    <div class="inscription-card" *ngFor="let reg of inscriptions">
+      <img [src]="getImage(reg.event)" alt="Image de l'événement">
+      <div class="info">
+        <h3>{{ reg.event.titre }}</h3>
+        <p>📅 {{ reg.event.date_debut }} au {{ reg.event.date_fin }}</p>
+        <p>📍 {{ reg.event.lieu }}</p>
+        <p>Status : <strong>{{ reg.statut }}</strong></p>
+
+        <a [routerLink]="['/evenements', reg.event.id]" class="btn">Détails</a>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noInscriptions>
+    <p>Vous n’êtes inscrit à aucun événement pour le moment.</p>
+  </ng-template>
+</div>

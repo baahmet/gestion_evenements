@@ -1,0 +1,57 @@
+<!-- Arrière-plan animé -->
+<div class="animated-bg-admin"></div>
+<!-- 🏠 Bouton flottant vers la page d'accueil utilisateur -->
+<a routerLink="/dashboard/user" class="floating-home-btn" title="Retour à l’accueil">
+  🏠
+</a>
+<div *ngIf="isLoading" class="spinner-container">
+  <div class="spinner"></div>
+  <p>Chargement des événements...</p>
+</div>
+
+
+<div class="filter-form">
+  <input type="text" placeholder="🔍 Rechercher un événement..." [(ngModel)]="filters.titre" />
+
+  <input type="text" placeholder="📍 Lieu" [(ngModel)]="filters.lieu" />
+
+  <input type="text" placeholder="🏷 Catégorie" [(ngModel)]="filters.categorie" />
+
+  <input type="date" [(ngModel)]="filters.date" />
+
+  <button (click)="applyFilters()">Filtrer</button>
+  <button (click)="resetFilters()">Réinitialiser</button>
+</div>
+
+<div class="event-grid">
+  <div class="event-card" *ngFor="let event of paginatedEvents">
+    <!-- image dynamique -->
+    <img [src]="getImage(event)" alt="image événement" />
+
+    <div class="event-content">
+      <h3>{{ event.titre }}</h3>
+      <p class="description">{{ event.description }}</p>
+      <p class="date-lieu">
+        📅 {{ event.date_debut }} au {{ event.date_fin }}<br />
+        📍 {{ event.lieu }}
+      </p>
+      <a [routerLink]="['/evenements', event.id]" class="btn-inscrire">Voir plus</a>
+
+    </div>
+  </div>
+
+  <!-- 🌐 Pagination -->
+  <div class="pagination-container" *ngIf="totalPages > 1">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">⬅ Précédent</button>
+
+    <button *ngFor="let page of [].constructor(totalPages); let i = index"
+            [class.active]="currentPage === i + 1"
+            (click)="goToPage(i + 1)">
+      {{ i + 1 }}
+    </button>
+
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant ➡</button>
+  </div>
+
+</div>
+

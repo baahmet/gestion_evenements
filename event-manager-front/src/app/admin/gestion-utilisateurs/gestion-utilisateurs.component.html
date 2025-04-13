@@ -1,0 +1,77 @@
+<!-- 🌈 Arrière-plan animé -->
+<div class="animated-bg-admin"></div>
+
+<!-- Spinner de chargement -->
+<div *ngIf="isLoading" class="spinner-container">
+  <div class="spinner-wrapper">
+    <div class="spinner"></div>
+    <div class="spinner-inner"></div>
+    <p>Chargement des utilisateurs...</p>
+  </div>
+</div>
+
+<div class="admin-container">
+  <!-- 🏠 Bouton flottant -->
+  <a routerLink="/dashboard/admin" class="floating-home-btn" title="Retour à l'accueil">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <div class="admin-header">
+    <h2><i class="fas fa-users"></i> Gestion des utilisateurs</h2>
+    <p>Administrez les comptes et permissions des utilisateurs</p>
+  </div>
+
+  <!-- 🔍 Champ de recherche -->
+  <div class="search-container">
+    <i class="fas fa-search"></i>
+    <input
+      type="text"
+      placeholder="Rechercher un utilisateur..."
+      [(ngModel)]="searchTerm"
+      (input)="filterUsers()"
+      class="search-bar"
+    />
+  </div>
+
+  <!-- 🧾 Tableau des utilisateurs -->
+  <div class="table-responsive">
+    <table>
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Rôle</th>
+        <th>Inscrit le</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of filteredUsers" class="user-row">
+        <td data-label="Nom">{{ user.name }}</td>
+        <td data-label="Email">{{ user.email }}</td>
+        <td data-label="Rôle">
+          <div class="role-select">
+            <select [(ngModel)]="user.role" (change)="changeRole(user, user.role)">
+              <option value="utilisateur">Utilisateur</option>
+              <option value="admin">Admin</option>
+            </select>
+            <i class="fas fa-caret-down"></i>
+          </div>
+        </td>
+        <td data-label="Inscrit le">{{ user.created_at | date:'dd/MM/yyyy' }}</td>
+        <td data-label="Actions">
+          <button (click)="deleteUser(user)" class="delete-btn">
+            <i class="fas fa-trash-alt"></i> Supprimer
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Message si aucun résultat -->
+  <div *ngIf="filteredUsers.length === 0 && !isLoading" class="no-results">
+    <i class="fas fa-user-slash"></i>
+    <p>Aucun utilisateur trouvé</p>
+  </div>
+</div>

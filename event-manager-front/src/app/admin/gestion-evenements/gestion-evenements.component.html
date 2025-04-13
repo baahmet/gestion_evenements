@@ -1,0 +1,97 @@
+<!-- 🌈 Arrière-plan animé -->
+<div class="animated-bg-admin"></div>
+<div *ngIf="isLoading" class="spinner-container">
+  <div class="spinner"></div>
+  <p>Chargement des événements...</p>
+</div>
+<div class="admin-container">
+  <!-- 🔔 Notification -->
+  <div *ngIf="showNotification" class="notification" [class.success]="notificationType === 'success'"
+       [class.error]="notificationType === 'error'" [class.slide-out]="!showNotification">
+    <i class="fas" [class.fa-check-circle]="notificationType === 'success'"
+       [class.fa-exclamation-circle]="notificationType === 'error'"></i>
+    {{ notificationMessage }}
+  </div>
+  <h2>🎯 Gestion des événements</h2>
+  <!-- 🏠 Bouton flottant vers l’accueil -->
+  <a routerLink="/dashboard/admin" class="floating-home-btn" title="Retour à l’accueil">
+    🏠
+  </a>
+  <!-- 🎯 Formulaire -->
+  <form (ngSubmit)="saveEvent()" class="event-form">
+    <input type="text" placeholder="Titre" [(ngModel)]="newEvent.titre" name="titre" required />
+    <input type="text" placeholder="Lieu" [(ngModel)]="newEvent.lieu" name="lieu" required />
+    <input type="datetime-local" [(ngModel)]="newEvent.date_debut" name="date_debut" required />
+    <input type="datetime-local" [(ngModel)]="newEvent.date_fin" name="date_fin" required />
+    <input type="number" min="1" placeholder="Capacité" [(ngModel)]="newEvent.capacite" name="capacite" required />
+    <input type="text" placeholder="Catégorie" [(ngModel)]="newEvent.categorie" name="categorie" />
+    <input type="text" placeholder="Image (URL)" [(ngModel)]="newEvent.image" name="image" (input)="updatePreview()" />
+
+    <div *ngIf="imagePreview" class="image-preview">
+      <p>Aperçu :</p>
+      <img [src]="imagePreview" alt="Prévisualisation" />
+    </div>
+
+    <textarea placeholder="Description" [(ngModel)]="newEvent.description" name="description"></textarea>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-primary">{{ isEditing ? 'Modifier' : 'Créer' }}</button>
+      <button type="button" (click)="resetForm()" class="btn-secondary">Annuler</button>
+    </div>
+  </form>
+
+  <hr />
+
+
+  <!-- 🔍 Filtre par catégorie -->
+  <div class="filter-admin">
+    <label for="categorieFilter">Filtrer par catégorie :</label>
+    <select id="categorieFilter" [(ngModel)]="selectedCategorie" (change)="filtrerEvenements()">
+      <option value="">Toutes les catégories</option>
+      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+    </select>
+
+    <button (click)="resetFiltre()" class="btn-reset">🔄 Réinitialiser</button>
+  </div>
+</div>
+
+
+  <!-- 🎯 Cartes d'événements en grille -->
+  <div class="event-grid">
+    <div class="event-card" *ngFor="let event of paginatedEvents; index as i" [style.animationDelay]="getStaggerDelay(i)">
+
+    <img [src]="getImage(event)" alt="Illustration" />
+
+      <div class="event-info">
+        <h3>{{ event.titre }}</h3>
+        <p>📅 {{ event.date_debut }} → {{ event.date_fin }}</p>
+        <p>📍 {{ event.lieu }} | 👥 {{ event.capacite }} pers.</p>
+        <p>{{ event.description }}</p>
+      </div>
+
+      <div class="event-actions">
+        <button (click)="editEvent(event)" class="btn-edit">✏️ Modifier</button>
+        <button (click)="deleteEvent(event.id)" class="btn-delete">🗑 Supprimer</button>
+        <button (click)="downloadPdf(event.id)" class="btn-pdf">📄 PDF</button>
+      </div>
+    </div>
+
+
+    <!-- 🌐 Pagination -->
+    <div class="pagination-container" *ngIf="totalPages > 1">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">⬅ Précédent</button>
+
+      <button *ngFor="let page of [].constructor(totalPages); let i = index"
+              [class.active]="currentPage === i + 1"
+              (click)="goToPage(i + 1)">
+        {{ i + 1 }}
+      </button>
+
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant ➡</button>
+    </div>
+
+
+  </div>
+
+
+

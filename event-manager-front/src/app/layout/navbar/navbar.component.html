@@ -1,0 +1,42 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="logo">
+      <a routerLink="/evenements">
+        <span class="logo-icon">📅</span>
+        <span class="logo-text">Gestion des événements</span>
+      </a>
+    </div>
+
+    <div class="mobile-menu-toggle">
+      <div class="hamburger"></div>
+    </div>
+
+    <ul class="nav-links">
+      <ng-container *ngIf="!isLoggedIn">
+        <li><a routerLink="/login" class="nav-link">Connexion</a></li>
+        <li><a routerLink="/register" class="nav-link register-btn">Inscription</a></li>
+      </ng-container>
+
+      <ng-container *ngIf="isLoggedIn">
+        <li>
+          <span class="role-badge">
+            <span class="user-icon">👤</span>
+            <span class="role-text">Connecté en tant que : <strong>{{ userRole }}</strong></span>
+          </span>
+        </li>
+        <li>
+          <a routerLink="/calendrier" class="nav-link calendar-link">
+            <span class="nav-icon">🗓️</span>
+            <span class="nav-text">Calendrier</span>
+          </a>
+        </li>
+        <li>
+          <button (click)="logout()" class="btn-logout">
+            <span class="logout-icon">🚪</span>
+            <span class="logout-text">Déconnexion</span>
+          </button>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</nav>

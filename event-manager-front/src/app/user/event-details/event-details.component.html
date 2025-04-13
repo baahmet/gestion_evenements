@@ -1,0 +1,47 @@
+<div class="event-details-container" *ngIf="event">
+  <!-- 🌈 Retour à la liste -->
+  <a routerLink="/evenements" class="floating-back-btn" title="Retour à la liste">
+    🔙
+  </a>
+
+
+  <img [src]="getImage(event)" alt="Image de l’événement" class="event-banner" />
+
+  <div class="admin-container">
+    <!-- 🔔 Notification -->
+    <div *ngIf="showNotification" class="notification" [class.success]="notificationType === 'success'"
+         [class.error]="notificationType === 'error'" [class.slide-out]="!showNotification">
+      <i class="fas" [class.fa-check-circle]="notificationType === 'success'"
+         [class.fa-exclamation-circle]="notificationType === 'error'"></i>
+      {{ notificationMessage }}
+    </div>
+  <div class="event-info">
+    <h2>{{ event.titre }}</h2>
+
+    <p class="date-lieu">
+      📅 Du <strong>{{ event.date_debut }}</strong> au <strong>{{ event.date_fin }}</strong><br />
+      📍 <span>{{ event.lieu }}</span>
+    </p>
+
+    <p class="description">{{ event.description }}</p>
+
+    <p class="categorie" *ngIf="event.categorie">
+      🏷 <strong>Catégorie :</strong> {{ event.categorie }}
+    </p>
+
+    <p class="capacite">
+      👥 <strong>Capacité maximale :</strong> {{ event.capacite }} participants
+    </p>
+
+
+    <!-- ✅ Boutons d'action -->
+    <div *ngIf="isRegistered; else inscrireBloc">
+      <button class="btn-participer2" (click)="onUnregister()">❌ Se désinscrire</button>
+    </div>
+
+    <ng-template #inscrireBloc>
+      <button class="btn-participer1" (click)="onRegister()">✅ S'inscrire</button>
+    </ng-template>
+  </div>
+</div>
+</div>

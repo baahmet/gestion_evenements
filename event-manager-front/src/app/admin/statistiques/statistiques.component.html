@@ -1,0 +1,58 @@
+<!-- 🌈 Arrière-plan animé amélioré -->
+<div class="animated-bg-admin"></div>
+
+<!-- Spinner (chargement) -->
+<div *ngIf="isLoading" class="spinner-container">
+  <div class="spinner-wrapper">
+    <div class="spinner"></div>
+    <div class="spinner-inner"></div>
+    <p>Chargement des statistiques...</p>
+  </div>
+</div>
+
+<!-- 🏠 Bouton flottant vers la page d'accueil utilisateur -->
+<a routerLink="/dashboard/admin" class="floating-home-btn" title="Retour à l'accueil">
+  <i class="fas fa-home"></i>
+</a>
+
+<!-- Contenu principal après chargement -->
+<div *ngIf="!isLoading && stats" class="stat-container">
+  <div class="stat-header">
+    <h2><i class="fas fa-chart-line"></i> Tableau de bord Admin</h2>
+    <p>Bienvenue dans l'espace d'administration d'Event Manager</p>
+  </div>
+
+  <!-- Cartes statistiques -->
+  <div class="stats-grid">
+    <div class="stat-card" *ngFor="let card of statCards" [ngClass]="'stat-' + card.id">
+      <div class="stat-icon">{{card.icon}}</div>
+      <div class="stat-value">{{card.value}}</div>
+      <div class="stat-label">{{card.label}}</div>
+      <div class="stat-progress"></div>
+    </div>
+  </div>
+
+  <!-- Top événements -->
+  <div class="top-events-section">
+    <div class="section-header">
+      <h3><i class="fas fa-fire"></i> Top 5 événements</h3>
+      <div class="view-all">Voir tout</div>
+    </div>
+    <div class="events-list">
+      <div class="event-item" *ngFor="let e of stats.top_events; let i = index">
+        <div class="event-rank">{{i + 1}}</div>
+        <div class="event-info">
+          <div class="event-title">{{e.titre}}</div>
+          <div class="event-meta">
+            <span class="event-location"><i class="fas fa-map-marker-alt"></i> {{e.lieu}}</span>
+            <span class="event-date"><i class="far fa-calendar-alt"></i> {{e.date_debut | date:'dd/MM/yyyy'}}</span>
+          </div>
+        </div>
+        <div class="event-registrations">
+          <div class="registrations-count">{{e.registrations_count}}</div>
+          <div class="registrations-label">inscrits</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

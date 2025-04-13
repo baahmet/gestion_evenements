@@ -1,0 +1,49 @@
+<div class="admin-dashboard" [class.dark-mode]="darkMode">
+  <!-- 🌈 Fond animé -->
+  <div class="animated-bg-admin"></div>
+
+  <!-- 🌓 Toggle mode sombre -->
+  <button class="toggle-dark-mode" (click)="toggleDarkMode()">
+    {{ darkMode ? '☀️ Mode clair' : '🌙 Mode sombre' }}
+  </button>
+
+  <div class="dashboard-content">
+    <h2>👑 Tableau de bord Administrateur</h2>
+    <p>Bienvenue dans l’espace d’administration de <strong>Gestion des Événements</strong>.</p>
+
+    <!-- 📊 Statistiques -->
+    <section class="stats-section" *ngIf="stats">
+      <div class="stat-card bg-blue">
+        <div class="icon">📅</div>
+        <div class="info">
+          <strong>{{ stats.total_events }}</strong>
+          <span>Événements</span>
+        </div>
+      </div>
+      <div class="stat-card bg-green">
+        <div class="icon">👥</div>
+        <div class="info">
+          <strong>{{ stats.total_users }}</strong>
+          <span>Utilisateurs</span>
+        </div>
+      </div>
+      <div class="stat-card bg-purple">
+        <div class="icon">📝</div>
+        <div class="info">
+          <strong>{{ stats.total_inscriptions }}</strong>
+          <span>Inscriptions</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🧭 Actions rapides -->
+    <section class="quick-actions">
+      <a routerLink="/admin/events" class="action-card">🎯 Gérer les événements</a>
+      <a routerLink="/admin/utilisateurs" class="action-card">👤 Gérer les utilisateurs</a>
+      <a routerLink="/admin/statistiques" class="action-card">📊 Statistiques détaillées</a>
+    </section>
+  </div>
+
+  <!-- 🏠 Bouton accueil -->
+  <a routerLink="/dashboard/user" class="floating-home-btn" title="Retour accueil">🏠</a>
+</div>

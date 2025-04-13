@@ -1,0 +1,42 @@
+<div class="dashboard-container-v2">
+  <!-- 🌠 Arrière-plan animé -->
+  <div class="bg-animated-waves"></div>
+
+  <!-- 🥳 Accueil utilisateur -->
+
+
+  <section class="welcome-v2">
+    <div class="welcome-content">
+      <h1>Bienvenue <span class="accent-name">{{ user?.name }}</span> 🎉</h1>
+      <p class="welcome-message">Nous sommes heureux de vous retrouver sur <strong class="brand-name">Gestion des Evénements</strong>.</p>
+
+      <div class="welcome-buttons">
+        <a routerLink="/evenements" class="btn-primary">📅 Explorer les événements</a>
+        <a routerLink="/mes-inscriptions" class="btn-secondary">📝 Mes inscriptions</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Dernières inscriptions -->
+  <section class="last-registrations">
+    <h2>🗓️ Vos dernières inscriptions</h2>
+
+    <div *ngIf="inscriptions.length > 0; else noInscriptions" class="cards">
+      <div class="card" *ngFor="let reg of inscriptions">
+        <h3>{{ reg.event.titre }}</h3>
+        <p>📍 {{ reg.event.lieu }}</p>
+        <p>📅 {{ reg.event.date_debut | date:'dd/MM/yyyy' }} → {{ reg.event.date_fin | date:'dd/MM/yyyy' }}</p>
+      </div>
+    </div>
+
+    <ng-template #noInscriptions>
+      <div class="empty-block">
+        <span class="material-icons">event_busy</span>
+        <p>Vous n'avez pas encore d'inscription.</p>
+        <a routerLink="/evenements" class="btn-tertiary">Découvrir les événements</a>
+      </div>
+    </ng-template>
+  </section>
+
+
+</div>

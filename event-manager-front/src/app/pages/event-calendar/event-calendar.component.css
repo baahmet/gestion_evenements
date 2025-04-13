@@ -1,0 +1,169 @@
+/* 🌈 Style général du composant */
+:host {
+  display: block;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+  color: #4f46e5;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #4f46e5, #a78bfa);
+  border-radius: 3px;
+}
+
+/* 🗓️ Style du calendrier FullCalendar */
+.full-calendar {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.full-calendar:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* En-tête du calendrier */
+.fc-header-toolbar {
+  margin-bottom: 1rem !important;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: rgba(79, 70, 229, 0.05);
+}
+
+.fc-toolbar-title {
+  font-weight: 600;
+  color: #4f46e5;
+}
+
+.fc-button {
+  background-color: #4f46e5 !important;
+  border: none !important;
+  color: white !important;
+  border-radius: 6px !important;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.fc-button:hover {
+  background-color: #4338ca !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.fc-button:active {
+  transform: translateY(0) !important;
+}
+
+/* Cellules du calendrier */
+.fc-daygrid-day {
+  transition: all 0.2s ease;
+}
+
+.fc-daygrid-day:hover {
+  background-color: rgba(79, 70, 229, 0.05) !important;
+}
+
+.fc-daygrid-day.fc-day-today {
+  background-color: rgba(79, 70, 229, 0.1) !important;
+}
+
+/* Événements du calendrier */
+.fc-event {
+  background-color: #4f46e5 !important;
+  border: none !important;
+  border-radius: 4px !important;
+  padding: 2px 4px !important;
+  transition: all 0.3s ease !important;
+}
+
+.fc-event:hover {
+  background-color: #4338ca !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.fc-event-title {
+  font-weight: 500 !important;
+}
+
+/* 🏠 Bouton flottant amélioré */
+.floating-home-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+  text-decoration: none;
+  animation: float 3s ease-in-out infinite;
+}
+
+.floating-home-btn:hover {
+  transform: scale(1.1) translateY(-5px);
+  background: linear-gradient(135deg, #4338ca, #7c3aed);
+  box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
+
+  .fc-header-toolbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .fc-toolbar-title {
+    font-size: 1.2rem !important;
+  }
+
+  .floating-home-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    bottom: 20px;
+    right: 20px;
+  }
+}
